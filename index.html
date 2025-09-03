@@ -90,6 +90,14 @@
       line-height: 1.1;
       letter-spacing: -0.02em;
     }
+    .glow-effect {
+      text-shadow: 0 0 20px #009fe9, 0 0 40px #009fe9, 0 0 60px #009fe9;
+      animation: glow-pulse 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow-pulse {
+      from { text-shadow: 0 0 20px #009fe9, 0 0 40px #009fe9, 0 0 60px #009fe9; }
+      to { text-shadow: 0 0 30px #009fe9, 0 0 60px #009fe9, 0 0 90px #009fe9; }
+    }
     .animated-gradient {
         background: linear-gradient(90deg, #ff0000, #ffffff, #ff0000);
         background-size: 200% auto;
@@ -132,6 +140,8 @@
     .purchase-btn:focus {
       background-color: #0077c2;
       outline: none;
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(0, 159, 233, 0.4);
     }
     .discord-btn {
       border: 2px solid #009fe9;
@@ -173,8 +183,27 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(0, 159, 233, 0.2);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 30px rgba(0, 159, 233, 0.4);
+        border-color: rgba(0, 159, 233, 0.5);
+    }
+    .feature-card {
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .feature-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(0, 159, 233, 0.2), transparent);
+        transition: left 0.5s;
+    }
+    .feature-card:hover::before {
+        left: 100%;
     }
     .feature-card img {
         width: 100%;
@@ -211,9 +240,31 @@
         margin-bottom: 48px;
     }
     .pricing-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        display: flex;
+        justify-content: center;
         gap: 24px;
+    }
+    .pricing-features {
+        text-align: left;
+        margin-bottom: 20px;
+    }
+    .pricing-features p {
+        margin: 8px 0;
+        color: #ccc;
+        font-size: 14px;
+    }
+    .subscription-note {
+        text-align: center;
+        margin-top: 30px;
+        padding: 20px;
+        background: rgba(0, 159, 233, 0.1);
+        border-radius: 15px;
+        border: 1px solid rgba(0, 159, 233, 0.3);
+    }
+    .subscription-note p {
+        color: #009fe9;
+        font-weight: 600;
+        margin: 0;
     }
     .pricing-card {
         background-color: rgba(255, 255, 255, 0.03);
@@ -224,8 +275,9 @@
         transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
     .pricing-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 10px 20px rgba(0, 159, 233, 0.2);
+        transform: translateY(-15px) scale(1.05);
+        box-shadow: 0 20px 40px rgba(0, 159, 233, 0.5);
+        border-color: #009fe9;
     }
     .pricing-card.lifetime {
         border-color: #009fe9;
@@ -299,8 +351,8 @@
 
   <div class="main-content">
     <section class="hero-section" role="banner">
-        <h1 class="animated-gradient">KingMod</h1>
-        <p>The Ultimate Mod Menu for Rocket League</p>
+        <h1 class="animated-gradient glow-effect">KingMod Pro</h1>
+        <p>Premium Gaming Enhancement Suite - €10/Month</p>
         <div class="hero-buttons">
         <a href="#pricing" class="purchase-btn">View Prices</a>
         <a href="https://discord.gg/rNpYUuTc2q" target="_blank" rel="noopener noreferrer" class="discord-btn">Join Discord</a>
@@ -311,78 +363,62 @@
         <h2>Features</h2>
         <div class="features-grid">
             <div class="feature-card">
-                <img src="1.png" alt="Ball Prediction Feature Image">
+                <img src="1.png" alt="Items Spawner Feature">
                 <div class="feature-card-content">
-                    <h4>Ball Prediction</h4>
-                    <p>See the exact trajectory of the ball with our advanced prediction lines.</p>
+                    <h4>Items Spawner</h4>
+                    <p>Spawn any in-game items instantly with our advanced item generation system.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <img src="2.png" alt="Player Boost ESP Feature Image">
+                <img src="2.png" alt="Credit Spawner Feature">
                 <div class="feature-card-content">
-                    <h4>Player Boost ESP</h4>
-                    <p>Always know how much boost your opponents and teammates have.</p>
+                    <h4>Credit Spawner</h4>
+                    <p>Generate unlimited credits and currency for your gaming experience.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <img src="1.png" alt="Player ESP Feature Image">
+                <img src="3.png" alt="Hitbox & Boost Pads Feature">
                 <div class="feature-card-content">
-                    <h4>Player ESP</h4>
-                    <p>Track every player on the field with clean and clear visual boxes.</p>
+                    <h4>Hitbox & Boost Pads</h4>
+                    <p>Visualize hitboxes and boost pad locations with precision overlays.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <img src="2.png" alt="2D & 3D Ball Feature Image">
+                <img src="4.png" alt="ESP & Controller Overlay Feature">
                 <div class="feature-card-content">
-                    <h4>2D & 3D Ball</h4>
-                    <p>Visualize the ball's position on a 2D map or in 3D space at all times.</p>
+                    <h4>ESP Suite & Controller Overlay</h4>
+                    <p>Complete ESP for boost players, payers, controller overlay, players & 3D ball tracking.</p>
                 </div>
             </div>
             <div class="feature-card">
-                <img src="1.png" alt="Safe & Undetected Feature Image">
+                <img src="5.png" alt="Titles Spawner Feature">
                 <div class="feature-card-content">
-                    <h4>Safe & Undetected</h4>
-                    <p>Our mod menu is designed to be safe and minimize detection risk.</p>
-                </div>
-            </div>
-            <div class="feature-card">
-                <img src="2.png" alt="More Features Image">
-                <div class="feature-card-content">
-                    <h4>And Much More</h4>
-                    <p>Discover even more features by joining our Discord community.</p>
+                    <h4>Titles Spawner</h4>
+                    <p>Unlock and spawn any title or achievement in the game instantly.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <section class="pricing-section" id="pricing">
-        <h2>Pricing</h2>
+        <h2>Subscription Plans</h2>
         <div class="pricing-grid">
-            <div class="pricing-card">
-                <div class="pricing-duration">1 Day</div>
-                <div class="pricing-price">$3</div>
-                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Purchase</a>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-duration">1 Week</div>
-                <div class="pricing-price">$7</div>
-                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Purchase</a>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-duration">1 Month</div>
-                <div class="pricing-price">$15</div>
-                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Purchase</a>
-            </div>
-            <div class="pricing-card">
-                <div class="pricing-duration">1 Year</div>
-                <div class="pricing-price">$50</div>
-                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Purchase</a>
-            </div>
             <div class="pricing-card lifetime">
-                <div class="pricing-duration">Lifetime</div>
-                <div class="pricing-price">$100</div>
-                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Purchase</a>
+                <div class="pricing-duration">Monthly Pro</div>
+                <div class="pricing-price">€10</div>
+                <div class="pricing-features">
+                    <p>✓ All 5 Premium Features</p>
+                    <p>✓ Items & Credit Spawner</p>
+                    <p>✓ Complete ESP Suite</p>
+                    <p>✓ Hitbox & Boost Visualization</p>
+                    <p>✓ Titles Spawner</p>
+                    <p>✓ 24/7 Support</p>
+                </div>
+                <a href="https://discord.gg/rNpYUuTc2q" target="_blank">Subscribe Now</a>
             </div>
+        </div>
+        <div class="subscription-note">
+            <p>🔥 Premium monthly subscription includes all features with regular updates and priority support!</p>
         </div>
     </section>
   </div>
@@ -390,6 +426,35 @@
   <!-- Particles.js library -->
   <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
   <script>
+    // Add click effects to feature cards
+    document.addEventListener('DOMContentLoaded', function() {
+        const featureCards = document.querySelectorAll('.feature-card');
+        featureCards.forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add floating animation to pricing card
+        const pricingCard = document.querySelector('.pricing-card.lifetime');
+        if (pricingCard) {
+            pricingCard.style.animation = 'float 3s ease-in-out infinite';
+        }
+    });
+
+    // Add floating keyframes
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+    `;
+    document.head.appendChild(style);
+
     // Init particles background
     particlesJS('particles-js', {
       particles: {
